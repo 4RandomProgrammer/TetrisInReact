@@ -1,11 +1,24 @@
 import Menu from "./Menu";
+import Tetris from "./Tetris"
+import { useGameOver } from "../hooks/useGameOver";
 
 const Game = ({ rows, columns}) => {
-    const start = () => {console.log("Aguarda o jogo ficar pronto emocionado")}
+    const [gameOver, setGameOver, resetGameOver] = useGameOver();
+
+    const start = () => {
+        resetGameOver();
+    }
+
     return (
 
         <div className="Game">
-            <Menu OnClick={start}/>
+            {gameOver ? (
+                <Menu OnClick={start}/>
+            ) : 
+            (  
+                <Tetris rows={rows} columns={columns} setGameOver={setGameOver}/>
+            )}
+            
         </div>
     
     );
