@@ -1,3 +1,5 @@
+import './Menu.css'
+
 const Menu = ({ OnClick }) => (
     <div className="Menu">
         <button className="Button" onClick={OnClick}>Play tetris</button>
