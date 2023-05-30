@@ -1,12 +1,15 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import Game from "./components/Game.jsx"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <p>you-are-done</p>
+    <div className="App">
+      <Game rows={20} columns={10} />
+    </div>
+      
   )
 }
 
-export default App
+export default App;
