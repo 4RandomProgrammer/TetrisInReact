@@ -1,14 +1,22 @@
 import "./Tetris.css";
 //Components
 import Board from "./Board"
+import GameStats from "./GameStats";
 
 //Hooks
 import {useBoard} from "../hooks/useBoard"
+import { useGameStats } from "../hooks/useGameStats";
 
 const Tetris = ({rows,columns,setGameOver}) => {
-    
+    const[gameStats, addLinesCleared] = useGameStats();
+    const [board, setBoard] = useBoard({rows,columns});
+
+
     return (
-        <Board/>
+        <div className="Tetris">
+            <Board board={board}/>
+            <GameStats gameStats={gameStats}/> 
+        </div>
     );
 }
 
