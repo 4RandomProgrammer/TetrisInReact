@@ -20,5 +20,5 @@
 .GameStats .value {
     font-size: 2.8rem;
     margin-bottom: 0.5rem;
-    columns: #fff;
+    color: rgba(255,255,255, 1);
 }

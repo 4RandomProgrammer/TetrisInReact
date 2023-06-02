@@ -11,11 +11,13 @@ const Tetris = ({rows,columns,setGameOver}) => {
     const[gameStats, addLinesCleared] = useGameStats();
     const [board, setBoard] = useBoard({rows,columns});
 
+    const player = {tetrominos: []};
 
     return (
         <div className="Tetris">
             <Board board={board}/>
-            <GameStats gameStats={gameStats}/> 
+            <GameStats gameStats={gameStats}/>
+            <Previews tetrominos={player.tetrominos} />
         </div>
     );
 }
