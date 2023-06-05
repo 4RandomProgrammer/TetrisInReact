@@ -27,6 +27,10 @@
 }
 
 .tetromino__j {
+    background-color: rgb(222, 33, 33);
+}
+
+.tetromino__i {
     background-color: rgba(80, 227, 230, 1);
 }
 

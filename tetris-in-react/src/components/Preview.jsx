@@ -2,12 +2,12 @@ import React from 'react';
 import './Preview.css'
 
 import { buildBoard } from '../utils/Board';
-import {transferBoard} from '../utils/Tetrominoes';
+import { transferBoard } from '../utils/Tetrominoes';
 
 import BoardCell from './BoardCell';
 
 const Preview = ({tetromino, index}) => {
-    const {shape, className} = tetromino;
+    const {shape, className} = tetromino; //BUG AQ
     const board = buildBoard({rows:4, columns:4})
 
     const style = {top: `$(index * 15)vw`};
