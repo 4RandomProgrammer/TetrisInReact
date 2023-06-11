@@ -7,7 +7,7 @@ import { transferBoard } from '../utils/Tetrominoes';
 import BoardCell from './BoardCell';
 
 const Preview = ({tetromino, index}) => {
-    const {shape, className} = tetromino; //BUG AQ
+    const {shape, className} = tetromino;
     const board = buildBoard({rows:4, columns:4})
 
     const style = {top: `$(index * 15)vw`};
@@ -22,10 +22,10 @@ const Preview = ({tetromino, index}) => {
     
     return (
         <div className="Preview" style={style}>
-            <div className="PreviewBoard">
+            <div className="Preview-board">
                 {board.rows.map((row, y) =>
                     row.map((cell,x) =>(
-                        <BoardCell key={x - board.size.columns + x} cell={cell} />
+                        <BoardCell key={x * board.size.columns + x} cell={cell} />
                     ))
                 )}
             </div>
