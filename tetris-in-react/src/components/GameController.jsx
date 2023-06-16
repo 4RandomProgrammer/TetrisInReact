@@ -2,20 +2,31 @@ import "./GameController.css"
 
 //Utils
 import {Action, actionForKey} from "../utils/Input"
+import {playerController} from "../utils/PlayerController"
 
 const GameController = ({board,  gameStats, player, setGameOver,setPlayer}) => {
-    const onKeyDown = ({code}) => { 
+    const onKeyDown = ({code}) => {
         const action = actionForKey(code);
-        console.log("Aqui")
+        handleInput({action})
+    }
+
+    const onKeyUp = ({code}) => { 
+        const action = actionForKey(code);
 
         if (action === Action.Quit){
             setGameOver(true);
         }
     }
 
-    const onKeyUp = ({code}) => { 
-        console.log(`OnKeyDown ${code}`); 
-    }
+    const handleInput = ({ action }) => {
+        playerController({
+            action,
+            board,
+            player,
+            setPlayer,
+            setGameOver
+        });
+    };
 
 
     return (
