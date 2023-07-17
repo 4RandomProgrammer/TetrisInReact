@@ -14,6 +14,7 @@ const attemptRotation = ({board, player, setPlayer}) => {
         !hasCollision({ board,position, shape});
 
     if (!isValidRotation) {
+        console.log("Valida")
         setPlayer({
             ...player,
             tetromino : {
@@ -22,6 +23,7 @@ const attemptRotation = ({board, player, setPlayer}) => {
             }
         });
     } else {
+        console.log("Não valida")
         return false;
     }
 }
@@ -36,7 +38,6 @@ export const playerController = ({
     if(!action) return;
 
     if (action === Action.Rotate) {
-        console.log("tentei rodar");
         attemptRotation({board, player, setPlayer});
     }
 }
