@@ -13,8 +13,7 @@ const attemptRotation = ({board, player, setPlayer}) => {
         isWithinBoard({ board,position, shape}) &&
         !hasCollision({ board,position, shape});
 
-    if (!isValidRotation) {
-        console.log("Valida")
+    if (isValidRotation) {
         setPlayer({
             ...player,
             tetromino : {
@@ -23,7 +22,6 @@ const attemptRotation = ({board, player, setPlayer}) => {
             }
         });
     } else {
-        console.log("Não valida")
         return false;
     }
 }
@@ -39,5 +37,40 @@ export const playerController = ({
 
     if (action === Action.Rotate) {
         attemptRotation({board, player, setPlayer});
+    }
+    else {
+        const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
+            const delta = { row:0, column: 0 };
+            let isFastDropping = false;
+
+            if (action == Action.FastDrop) {
+                isFastDropping = true;
+            } else if (action == Action.SlowDrop) {
+                delta.row += 1;
+            }  else if (action == Action.Left) {
+                delta.column -= 1;
+            }  else if (action == Action.Right) {
+                delta.column += 1;
+            }
+
+            const { collided, nextPosition } = movePlayer({
+                delta,
+                position: player.position,
+                shape: player.tetromino.shape,
+                board
+            });
+
+            const isGameOver = collided && player.position.row === 0;
+            if (isGameOver){
+                setGameOver(isGameOver);
+            }
+
+            setPlayer({
+                ...player,
+                collided,
+                isFastDropping,
+                position: nextPosition
+            });
+        };  
     }
 }
