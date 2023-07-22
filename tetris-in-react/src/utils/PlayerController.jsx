@@ -39,38 +39,63 @@ export const playerController = ({
         attemptRotation({board, player, setPlayer});
     }
     else {
-        const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
-            const delta = { row:0, column: 0 };
-            let isFastDropping = false;
-
-            if (action == Action.FastDrop) {
-                isFastDropping = true;
-            } else if (action == Action.SlowDrop) {
-                delta.row += 1;
-            }  else if (action == Action.Left) {
-                delta.column -= 1;
-            }  else if (action == Action.Right) {
-                delta.column += 1;
-            }
-
-            const { collided, nextPosition } = movePlayer({
-                delta,
-                position: player.position,
-                shape: player.tetromino.shape,
-                board
-            });
-
-            const isGameOver = collided && player.position.row === 0;
-            if (isGameOver){
-                setGameOver(isGameOver);
-            }
-
-            setPlayer({
-                ...player,
-                collided,
-                isFastDropping,
-                position: nextPosition
-            });
-        };  
+       attemptMovement( {board, player, setPlayer, action, setGameOver} )
     }
 }
+
+export const movePlayer = ({delta, position, shape, board}) => {
+    const desiredNextPosition = {
+        row: position.row + delta.row,
+        column: position.column + delta.column
+    };
+
+    const collided = hasCollision({
+        board,
+        position: desiredNextPosition,
+        shape
+    });
+
+    const onBoard = isWithinBoard({board, position:desiredNextPosition, shape});
+
+    const preventMove = !onBoard || (onBoard && collided);
+    const nextPosition = preventMove ? position : desiredNextPosition;
+
+    const isMovingDown = delta.row > 0;
+    const isHit = isMovingDown && (collided && !onBoard)
+
+    return {collided: isHit, nextPosition }
+};
+
+const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
+    const delta = { row:0, column: 0 };
+    let isFastDropping = false;
+
+    if (action == Action.FastDrop) {
+        isFastDropping = true;
+    } else if (action == Action.SlowDrop) {
+        delta.row += 1;
+    }  else if (action == Action.Left) {
+        delta.column -= 1;
+    }  else if (action == Action.Right) {
+        delta.column += 1;
+    }
+
+    const { collided, nextPosition } = movePlayer({
+        delta,
+        position: player.position,
+        shape: player.tetromino.shape,
+        board
+    });
+
+    const isGameOver = collided && player.position.row === 0;
+    if (isGameOver){
+        setGameOver(isGameOver);
+    }
+
+    setPlayer({
+        ...player,
+        collided,
+        isFastDropping,
+        position: nextPosition
+    });
+};  
