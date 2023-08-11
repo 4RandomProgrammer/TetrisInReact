@@ -14,25 +14,25 @@ export const TETROMINOS = {
 
     J: { 
         shape: [
-            [0, 1, 0 , 0],
-            [0, 1, 0 , 0],
-            [1, 1, 0 , 0],
+            [0, 1, 0 ],
+            [0, 1, 0 ],
+            [1, 1, 0 ],
         ],
         className: `${className} ${className}__j`
     },
 
     L: { 
         shape: [
-            [0, 1, 0 , 0],
-            [0, 1, 0 , 0],
-            [0, 1, 1 , 0],
+            [0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 1],
         ],
         className: `${className} ${className}__l`
     },
     O: { 
             shape: [
                 [1, 1],
-                [1, 1   ],
+                [1, 1 ],
 
             ],
             className: `${className} ${className}__o`

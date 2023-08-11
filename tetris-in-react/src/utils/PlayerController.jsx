@@ -2,29 +2,30 @@ import { Action } from "./Input";
 import { rotate } from "./Tetrominoes";
 import {isWithinBoard, hasCollision} from "./Board"
 
-const attemptRotation = ({board, player, setPlayer}) => {
-    const shape = rotate({
-        piece: player.tetromino.shape,
-        direction: 1
+const attemptRotation = ({ board, player, setPlayer }) => {
+  const shape = rotate({
+    piece: player.tetromino.shape,
+    direction: 1
+  });
+
+  const position = player.position;
+  const isValidRotation =
+    isWithinBoard({ board, position, shape }) &&
+    !hasCollision({ board, position, shape });
+
+  if (isValidRotation) {
+    setPlayer({
+      ...player,
+      tetromino: {
+        ...player.tetromino,
+        shape
+      }
     });
+  } else {
+    return false;
+  }
+};
 
-    const position = player.position;
-    const isValidRotation = 
-        isWithinBoard({ board,position, shape}) &&
-        !hasCollision({ board,position, shape});
-
-    if (isValidRotation) {
-        setPlayer({
-            ...player,
-            tetromino : {
-                ...player.tetromino,
-                shape
-            }
-        });
-    } else {
-        return false;
-    }
-}
 
 export const playerController = ({
     action,
@@ -61,7 +62,7 @@ export const movePlayer = ({delta, position, shape, board}) => {
     const nextPosition = preventMove ? position : desiredNextPosition;
 
     const isMovingDown = delta.row > 0;
-    const isHit = isMovingDown && (collided && !onBoard)
+    const isHit = isMovingDown && (collided || !onBoard)
 
     return {collided: isHit, nextPosition }
 };
