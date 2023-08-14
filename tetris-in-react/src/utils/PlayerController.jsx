@@ -44,27 +44,31 @@ export const playerController = ({
     }
 }
 
-export const movePlayer = ({delta, position, shape, board}) => {
-    const desiredNextPosition = {
-        row: position.row + delta.row,
-        column: position.column + delta.column
-    };
+export const movePlayer = ({ delta, position, shape, board }) => {
+  const desiredNextPosition = {
+    row: position.row + delta.row,
+    column: position.column + delta.column
+  };
 
-    const collided = hasCollision({
-        board,
-        position: desiredNextPosition,
-        shape
-    });
+  const collided = hasCollision({
+    board,
+    position: desiredNextPosition,
+    shape
+  });
 
-    const onBoard = isWithinBoard({board, position:desiredNextPosition, shape});
+  const isOnBoard = isWithinBoard({
+    board,
+    position: desiredNextPosition,
+    shape
+  });
 
-    const preventMove = !onBoard || (onBoard && collided);
-    const nextPosition = preventMove ? position : desiredNextPosition;
+  const preventMove = !isOnBoard || (isOnBoard && collided);
+  const nextPosition = preventMove ? position : desiredNextPosition;
 
-    const isMovingDown = delta.row > 0;
-    const isHit = isMovingDown && (collided || !onBoard)
+  const isMovingDown = delta.row > 0;
+  const isHit = isMovingDown && (collided || !isOnBoard);
 
-    return {collided: isHit, nextPosition }
+  return { collided: isHit, nextPosition };
 };
 
 const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {

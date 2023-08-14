@@ -14,7 +14,6 @@ const buildPlayer = (previous) => {
         tetrominos = Array(5).fill(0).map((_) => randomTetromino());
     }
 
-    // console.log(tetrominos)
 
     return {
         collided: false,
