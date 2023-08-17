@@ -6,7 +6,7 @@ export const TETROMINOS = {
             [0, 1, 0 , 0],
             [0, 1, 0 , 0],
             [0, 1, 0 , 0],
-            [0, 1, 0 , 0],
+            [0, 1, 0 , 0]
         ],
         className: `${className} ${className}__i`
 
@@ -16,7 +16,7 @@ export const TETROMINOS = {
         shape: [
             [0, 1, 0 ],
             [0, 1, 0 ],
-            [1, 1, 0 ],
+            [1, 1, 0 ]
         ],
         className: `${className} ${className}__j`
     },
@@ -25,14 +25,14 @@ export const TETROMINOS = {
         shape: [
             [0, 1, 0],
             [0, 1, 0],
-            [0, 1, 1],
+            [0, 1, 1]
         ],
         className: `${className} ${className}__l`
     },
     O: { 
             shape: [
                 [1, 1],
-                [1, 1 ],
+                [1, 1]
 
             ],
             className: `${className} ${className}__o`
@@ -41,7 +41,7 @@ export const TETROMINOS = {
         shape: [
             [0, 1, 1],
             [1, 1, 0],
-            [0, 0, 0],
+            [0, 0, 0]
         ],
         className: `${className} ${className}__s`
     },
@@ -50,7 +50,7 @@ export const TETROMINOS = {
             shape: [
                 [1, 1, 1 ],
                 [0, 1, 0 ],
-                [0, 0, 0 ],
+                [0, 0, 0 ]
             ],
             className: `${className} ${className}__t`
         },
@@ -91,6 +91,7 @@ export const transferBoard = ({
 }) => {
     shape.forEach((row, y) => {
         row.forEach((cell, x) => {
+            // console.log(rows)
             if (cell) {
                 const occupied = isOccupied;
                 const _y = y + position.row;
