@@ -77,7 +77,7 @@ export const rotate = ({piece, direction}) => {
     const newPiece = piece.map((_,index) => 
     piece.map((column) => column[index]));
 
-    if (direction < 0 ) return newPiece.map((row) => row.reverse())
+    if (direction > 0 ) return newPiece.map((row) => row.reverse())
 
     return newPiece.reverse();
 }
@@ -95,10 +95,10 @@ export const transferBoard = ({
                 const occupied = isOccupied;
                 const _y = y + position.row;
                 const _x = x + position.column;
-                rows[_y][_x] = {occupied, className}
+                rows[_y][_x] = {occupied, className};
             }
         });
     });
 
-    return rows
+    return rows;
 }
