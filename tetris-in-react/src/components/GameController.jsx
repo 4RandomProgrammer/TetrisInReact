@@ -26,6 +26,8 @@ const GameController = ({board,  gameStats, player, setGameOver,setPlayer}) => {
                 resumeDropTime();
             }
         } else if (action === Action.Quit){
+            localStorage.setItem('ReactrisPoints',`${gameStats.points}`)
+            document.cookie = `reactrisPoints=${gameStats.points}`
             setGameOver(true);
         } else {
             handleInput({action});
