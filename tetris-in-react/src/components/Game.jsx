@@ -5,9 +5,9 @@ import { useGameOver } from "../hooks/useGameOver";
 const Game = ({ rows, columns}) => {
     const [gameOver, setGameOver, resetGameOver] = useGameOver();
 
-    const start = () => {
+    const start = () => 
         resetGameOver();
-    }
+    
 
     return (
 
@@ -22,6 +22,6 @@ const Game = ({ rows, columns}) => {
         </div>
     
     );
-}
+};
 
 export default Game;

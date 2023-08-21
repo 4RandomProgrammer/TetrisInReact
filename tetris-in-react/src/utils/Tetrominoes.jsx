@@ -62,7 +62,7 @@ export const TETROMINOS = {
             [0, 0, 0 ]
         ],
         className: `${className} ${className}__z`
-    },
+    }
 };
 
 export const randomTetromino = () => {
@@ -96,6 +96,8 @@ export const transferBoard = ({
                 const occupied = isOccupied;
                 const _y = y + position.row;
                 const _x = x + position.column;
+                // console.log(_x);
+                // console.log(_y);
                 rows[_y][_x] = {occupied, className};
             }
         });

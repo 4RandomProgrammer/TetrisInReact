@@ -21,6 +21,6 @@ const Board = ({board}) => {
             )}
         </div>
     );
-}
+};
 
 export default Board;

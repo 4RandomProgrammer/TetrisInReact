@@ -10,7 +10,7 @@ const buildGameStats = () => ({
 export const useGameStats = () => {
     const [gameStats,setGameStats] = useState(buildGameStats());
 
-    const addLinesCleared = useCallback(() =>{
+    const addLinesCleared = useCallback((lines) =>{
         setGameStats((previous) => {
             const points = previous.points + lines * 100;
             const {linesPerLevel} = previous;

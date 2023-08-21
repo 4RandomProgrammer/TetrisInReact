@@ -7,10 +7,4 @@ const Menu = ({ OnClick }) => (
     </div>
 )
 
-
-
-    
-    
-
-
 export default Menu;

@@ -62,6 +62,7 @@ export const movePlayer = ({ delta, position, shape, board }) => {
     shape
   });
 
+  console.log(isOnBoard)
   const preventMove = !isOnBoard || (isOnBoard && collided);
   const nextPosition = preventMove ? position : desiredNextPosition;
 
@@ -91,8 +92,6 @@ const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
         shape: player.tetromino.shape,
         board
     });
-
-    console.log(nextPosition)
 
     const isGameOver = collided && player.position.row === 0;
     if (isGameOver){

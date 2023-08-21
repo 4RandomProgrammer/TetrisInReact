@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useState } from "react";
 
 import { randomTetromino } from "../utils/Tetrominoes";
 
@@ -9,7 +9,6 @@ const buildPlayer = (previous) => {
         tetrominos = [...previous.tetrominos];
         tetrominos.unshift(randomTetromino());
     }
-
     else {
         tetrominos = Array(5).fill(0).map((_) => randomTetromino());
     }
