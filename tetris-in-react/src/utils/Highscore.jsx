@@ -8,7 +8,8 @@ export const setHighScore = ( { highscore } ) => {
         localStorage.setItem('ReactrisPoints',`${newHighscore}`)
         document.cookie = `ReactrisPoints=${newHighscore};`
     }
-    
+    localStorage.setItem('ReactrisPoints',`${local}`)
+    document.cookie = `ReactrisPoints=${local};`
 }
 
 export const getHighScore = ({name}) => {
