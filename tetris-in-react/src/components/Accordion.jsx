@@ -1,3 +1,4 @@
+import { getHighScore } from "../utils/Highscore";
 import "./Accordion.css";
 
 import { useState } from "react";
@@ -9,7 +10,7 @@ function Accordion() {
         if (selected == i) {
             return setSelected(null);
         }
-
+        
         setSelected(i)
     }
     return (
@@ -17,7 +18,7 @@ function Accordion() {
             <div className="accordion">
                 {
                     data.map((item, i) => (
-                        <div className="item">
+                        <div className="item" key={i + 1}>
                             <div className="title" onClick={() => toggle(i)}>
                                 <h2>{item.title}</h2>
                                 <span>{selected === i ? '↑' :'↓'}</span>
@@ -34,14 +35,14 @@ function Accordion() {
 
 }
 
-const data = [
+let data = [
     {
         title:'How to play',
         content:'Up Arrow: Rotate, right arrow: Move right, left arrow: move left, down arrow: lower the piece, Spacebar: Fast drop, p: pause.',
     },
     {
         title:'HighScores',
-        content:''
+        content: 'Your best Score: ' + getHighScore({name:'ReactrisPoints'})
     }
 ]
 

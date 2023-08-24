@@ -3,6 +3,7 @@ import "./GameController.css"
 //Utils
 import {Action, actionForKey, actionIsDrop} from "../utils/Input"
 import {playerController} from "../utils/PlayerController"
+import { setHighScore } from "../utils/Highscore"
 
 import { useInterval } from "../hooks/useInterval"
 import { useDropTime } from "../hooks/useDropTime"
@@ -26,8 +27,7 @@ const GameController = ({board,  gameStats, player, setGameOver,setPlayer}) => {
                 resumeDropTime();
             }
         } else if (action === Action.Quit){
-            localStorage.setItem('ReactrisPoints',`${gameStats.points}`)
-            document.cookie = `reactrisPoints=${gameStats.points}`
+            setHighScore({highscore:gameStats.points});
             setGameOver(true);
         } else {
             handleInput({action});
@@ -46,7 +46,8 @@ const GameController = ({board,  gameStats, player, setGameOver,setPlayer}) => {
             board,
             player,
             setPlayer,
-            setGameOver
+            setGameOver,
+            points: gameStats.points
         });
     };
 

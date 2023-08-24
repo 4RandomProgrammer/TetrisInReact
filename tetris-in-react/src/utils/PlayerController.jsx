@@ -1,6 +1,7 @@
 import { Action } from "./Input";
 import { rotate } from "./Tetrominoes";
 import {isWithinBoard, hasCollision} from "./Board"
+import { setHighScore } from "../utils/Highscore"
 
 const attemptRotation = ({ board, player, setPlayer }) => {
   const shape = rotate({
@@ -32,7 +33,8 @@ export const playerController = ({
     board,
     player,
     setPlayer,
-    setGameOver
+    setGameOver,
+    points
 }) => {
     if(!action) return;
 
@@ -40,7 +42,7 @@ export const playerController = ({
         attemptRotation({board, player, setPlayer});
     }
     else {
-       attemptMovement( {board, player, setPlayer, action, setGameOver} )
+       attemptMovement( {board, player, setPlayer, action, setGameOver, points} )
     }
 }
 
@@ -62,7 +64,6 @@ export const movePlayer = ({ delta, position, shape, board }) => {
     shape
   });
 
-  console.log(isOnBoard)
   const preventMove = !isOnBoard || (isOnBoard && collided);
   const nextPosition = preventMove ? position : desiredNextPosition;
 
@@ -72,7 +73,7 @@ export const movePlayer = ({ delta, position, shape, board }) => {
   return { collided: isHit, nextPosition };
 };
 
-const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
+const attemptMovement = ( {board, player, setPlayer, action, setGameOver, points} ) => {
     const delta = { row:0, column: 0 };
     let isFastDropping = false;
 
@@ -95,6 +96,8 @@ const attemptMovement = ( {board, player, setPlayer, action, setGameOver} ) => {
 
     const isGameOver = collided && player.position.row === 0;
     if (isGameOver){
+        console.log(points)
+        setHighScore({highscore:points});
         setGameOver(isGameOver);
     }
 
